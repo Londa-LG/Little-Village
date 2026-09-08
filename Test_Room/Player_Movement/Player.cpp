@@ -58,6 +58,8 @@ void Player::Walk_to_destination(sf::Vector2f destination)
 
 Player::Player(AssetManager &am)
 {
+  movement = {false,false,false,false,false,false};
+
   // Generate transform
   transform.position = position;
   transform.maxVel = mov_pix / (0.5 * mov_seconds);
@@ -65,6 +67,12 @@ Player::Player(AssetManager &am)
   transform.acceleration.y = pow(transform.maxVel,2) / (2 * mov_pix);
 
   // Assign sprite
+  sprite = am.characters[85];
+  sprite.setPosition(position);
+  sprite.scale(2,2);
 }
 
-
+void Player::draw(sf::RenderWindow &window)
+{
+  window.draw(sprite);
+}

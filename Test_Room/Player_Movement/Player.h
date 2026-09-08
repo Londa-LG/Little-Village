@@ -25,13 +25,14 @@ class Player{
     Movement movement;
     Transform transform;
 
-    float mov_pix = 2;
-    float mov_seconds = 1;
+    float mov_pix = 4;
+    float mov_seconds = 2;
     sf::Vector2f position = {400,300};
 
     Player(AssetManager &am);
     void sMovement();
     void Walk_to_destination(sf::Vector2f destination);
+    void draw(sf::RenderWindow &window);
 };
 
 
