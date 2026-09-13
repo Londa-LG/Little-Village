@@ -1,9 +1,13 @@
 #include <SFML/Graphics.hpp>
+#include "Conversation.h"
  
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800,600), "Window");
     window.setFramerateLimit(60);
+
+    DialogBox db1;
+    Conversation c = Conversation(db1);
 
     // Game loop
     while (window.isOpen())
@@ -18,6 +22,7 @@ int main()
         }
 
         window.clear(sf::Color::Yellow);
+        c.draw(window);
         window.display();
     }
 
