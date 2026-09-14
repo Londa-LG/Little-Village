@@ -5,7 +5,7 @@
 struct Dialog
 {
   int characterId;
-  std::vector<std::string> dialog;
+  std::string dialog;
 };
 
 struct DialogBox
@@ -22,16 +22,16 @@ class Conversation
     int max_char = 46;
     int max_lines = 4;
     int font_size = 20;
-    std::string default_text = "Default text. Replace me.";
-    Dialog player_dialog;
-    Dialog character_dialog;
+    int page_index = 0;
     sf::Vector2f position = { 20,480 };
+    std::vector<std::string> character_dialog;
+    std::string default_text = "Default text. Replace me.";
 
     Conversation(DialogBox db1);
-    void load_player_dialog(Dialog p_dialog);
     void load_character_dialog(Dialog p_dialog);
+    void remove_space(std::vector<std::string> &list);
+    std::string sub_str(std::string text,int start, int end);
 
-    void scale_dialog();
-    void update_dialog_box();
+    void turn_page();
     void draw(sf::RenderWindow &window);
 };
