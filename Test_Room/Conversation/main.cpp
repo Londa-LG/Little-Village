@@ -7,7 +7,10 @@ int main()
     window.setFramerateLimit(60);
 
     DialogBox db1;
-    Conversation c = Conversation(db1);
+    Dialog d1;
+    d1.characterId = 1;
+    d1.dialog = "Excuse me! You looked at me, didn't you? Thank you for waiting. We've restored you pokemon to full health We hope to see you again! Bug catcher collin sent out caterpie.";
+    Conversation c = Conversation(d1);
 
     // Game loop
     while (window.isOpen())
@@ -18,6 +21,13 @@ int main()
             if(event.type == sf::Event::Closed)
             {
                 window.close();
+            }
+            if(event.type = sf::Event::KeyPressed)
+            {
+              if(event.key.code == sf::Keyboard::N)
+              {
+                c.turn_page();
+              }
             }
         }
 

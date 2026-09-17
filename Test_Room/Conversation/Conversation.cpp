@@ -1,14 +1,15 @@
 #include "Conversation.h"
+#include <iostream>
 
-Conversation::Conversation(DialogBox db1)
+Conversation::Conversation(Dialog d1)
 {
-  d_box = db1;
+  load_character_dialog(d1);
   d_box.font.loadFromFile("./font/PixelifySans-VariableFont_wght.ttf");
   sf::Vector2f text_position = sf::Vector2f(position.x + 10,position.y + 10);
 
   d_box.text.setFont(d_box.font);
   d_box.text.setCharacterSize(font_size);
-  d_box.text.setString(default_text); // Maximum character size: 46
+  d_box.text.setString(character_dialog[0]); // Maximum character size: 46
   d_box.text.setPosition(text_position);
   d_box.text.setFillColor(sf::Color::Black);
 
@@ -28,9 +29,9 @@ void Conversation::turn_page()
   }
   else{
     page_index = 0;
+    d_box.text.setString(character_dialog[page_index]);
     // Close the conversation box.
   }
-   
 }
 
 void Conversation::draw(sf::RenderWindow &window)
@@ -70,7 +71,7 @@ void Conversation::load_character_dialog(Dialog p_dialog)
 
   if(p_dialog.dialog.size() > max_char)
   {
-    while(added < p_dialog.dialog.size())
+    do
     {
       for(int i=0; i<46;i++)
       {
@@ -79,7 +80,7 @@ void Conversation::load_character_dialog(Dialog p_dialog)
           space_index = added;
         }
 
-        if((i == 45) && (p_dialog.dialog[added] != ' '))
+        if((i == 46) && (p_dialog.dialog[added] != ' '))
         {
           buffer = sub_str(p_dialog.dialog,start,space_index);
           added = added - (added - space_index);
@@ -91,7 +92,7 @@ void Conversation::load_character_dialog(Dialog p_dialog)
       character_dialog.push_back(buffer);
       buffer = "";
       start = added;
-    }
+    }while(added < p_dialog.dialog.size());
     remove_space(character_dialog);
   }
   else
