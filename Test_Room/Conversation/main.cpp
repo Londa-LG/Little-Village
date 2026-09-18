@@ -1,16 +1,14 @@
 #include <SFML/Graphics.hpp>
-#include "Conversation.h"
+#include "Dialog.h"
  
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800,600), "Window");
+    sf::RenderWindow window(sf::VideoMode(800,600), "Dialog");
     window.setFramerateLimit(60);
 
-    DialogBox db1;
-    Dialog d1;
-    d1.characterId = 1;
-    d1.dialog = "Excuse me! You looked at me, didn't you? Thank you for waiting. We've restored you pokemon to full health We hope to see you again! Bug catcher collin sent out caterpie.";
-    Conversation c = Conversation(d1);
+    DialogBox d_box = DialogBox();
+    d_box.load_dialog("line 1\nline 2\nline 3\n");
+    d_box.load_dialog("row 1\nrow 2\nrow 3\n");
 
     // Game loop
     while (window.isOpen())
@@ -22,17 +20,23 @@ int main()
             {
                 window.close();
             }
-            if(event.type = sf::Event::KeyPressed)
+            if(event.type == sf::Event::KeyPressed)
             {
-              if(event.key.code == sf::Keyboard::N)
+              if(event.key.code == sf::Keyboard::Space)
               {
-                c.turn_page();
+                d_box.turn_page();
+              }
+              if(event.key.code == sf::Keyboard::S)
+              {
+                d_box.show = true;
               }
             }
         }
 
+        d_box.update();
+
         window.clear(sf::Color::Yellow);
-        c.draw(window);
+        d_box.draw(window);
         window.display();
     }
 
