@@ -8,6 +8,7 @@ ItemGenerator::ItemGenerator()
 Item ItemGenerator::generate_wood(Item &wood, AssetManager &am)
 {
   wood.name = "Log";
+  wood.collected = false;
   wood.type = Item_type::Resource;
   wood.description = "A log, from a tree.";
 
@@ -23,6 +24,7 @@ Item ItemGenerator::generate_wood(Item &wood, AssetManager &am)
 
 Item ItemGenerator::generate_money(Item &coin, AssetManager &am)
 {
+  coin.collected = false;
   coin.name = "Gold coin";
   coin.type = Item_type::Money;
   coin.description = "A gold coin used as local currency";
@@ -40,6 +42,7 @@ Item ItemGenerator::generate_money(Item &coin, AssetManager &am)
 Item ItemGenerator::generate_axe(Item &axe,std::string p_name,std::string p_description,AssetManager &am)
 {
   axe.name = p_name;
+  axe.collected = false;
   axe.description = p_description;
 
   axe.type = Item_type::Tool;
@@ -56,6 +59,7 @@ Item ItemGenerator::generate_axe(Item &axe,std::string p_name,std::string p_desc
 Item ItemGenerator::generate_battle_axe(Item &axe,std::string p_name,std::string p_description,AssetManager &am)
 {
   axe.name = p_name;
+  axe.collected = false;
   axe.description = p_description;
 
   axe.type = Item_type::Tool;

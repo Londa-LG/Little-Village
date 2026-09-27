@@ -2,15 +2,20 @@
 #include "Items.h"
 #include "Character.h"
 #include <vector>
+#include <iostream>
 
 bool collision_detected(Player &player,Item &item)
 {
   sf::Vector2f size = sf::Vector2f(16,16);
   sf::Vector2f iposition = item.bounds.getPosition();
 
-  if((player.transform.position.x + size.x) < iposition.x)
+  if(((player.transform.position.x + size.x) > iposition.x) && ((player.transform.position.x) < (iposition.x + size.x)))
   {
-    return false;
+    std::cout << "x collision" << std::endl;
+    if((abs(player.transform.position.y - iposition.y) < size.y) && (abs((player.transform.position.y + size.y) - iposition.y) < size.y))
+    {
+      return true;
+    }
   }
   if(player.transform.position.x > (iposition.x + size.x))
   {
@@ -25,11 +30,19 @@ bool collision_detected(Player &player,Item &item)
     return false;
   }
 
-  return true;
+  return false;
 }
 
-void sCollection(std::vector<Item> items,Player &player)
+void item_collection(std::vector<Item> items,Player &player)
 {
+  for(int i=0;i<items.size();i++)
+  {
+    if(collision_detected(player,items[i]))
+    {
+      std::cout << "collision detected" << std::endl;
+      items[i].collected = true;
+    }
+  }
 }
  
 int main()
@@ -55,6 +68,10 @@ int main()
     b_axe = ig.generate_battle_axe(b_axe,"Worn out battle axe","An old battle axe in need of repair.",am);
     b_axe.sprite.setPosition(750,500);
 
+    items.push_back(log);
+    items.push_back(axe);
+    items.push_back(coin);
+    items.push_back(b_axe);
 
     Player player = Player(am);
     Character npc = Character(am,84,{200,300},{600,300});
@@ -110,13 +127,17 @@ int main()
         }
 
         player.sMovement();
+        item_collection(items,player);
 
         window.clear(sf::Color::White);
 
-        window.draw(log.sprite);
-        window.draw(coin.sprite);
-        window.draw(axe.sprite);
-        window.draw(b_axe.sprite);
+        for(int i=0;i<items.size();i++)
+        {
+          if(!items[i].collected)
+          {
+            window.draw(items[i].sprite);
+          }
+        }
 
         player.draw(window);
 
