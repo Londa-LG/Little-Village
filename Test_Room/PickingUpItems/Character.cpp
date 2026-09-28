@@ -63,7 +63,7 @@ Character::Character(AssetManager &am,int sprite_index, sf::Vector2f start, sf::
   // Assign sprite
   sprite = am.characters[sprite_index];
   sprite.setPosition(path_start);
-  sprite.scale(2,2);
+  //sprite.scale(2,2);
 }
 
 void Character::draw(sf::RenderWindow &window)
@@ -140,7 +140,7 @@ Player::Player(AssetManager &am)
   // Assign sprite
   sprite = am.characters[85];
   sprite.setPosition(position);
-  sprite.scale(2,2);
+  //sprite.scale(2,2);
 }
 
 void Player::draw(sf::RenderWindow &window)

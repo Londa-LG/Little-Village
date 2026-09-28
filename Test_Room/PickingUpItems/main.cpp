@@ -7,39 +7,35 @@
 bool collision_detected(Player &player,Item &item)
 {
   sf::Vector2f size = sf::Vector2f(16,16);
-  sf::Vector2f iposition = item.bounds.getPosition();
+  sf::Vector2f i_position = item.sprite.getPosition();
+  sf::Vector2f p_position = player.transform.position;
 
-  if(((player.transform.position.x + size.x) > iposition.x) && ((player.transform.position.x) < (iposition.x + size.x)))
-  {
-    std::cout << "x collision" << std::endl;
-    if((abs(player.transform.position.y - iposition.y) < size.y) && (abs((player.transform.position.y + size.y) - iposition.y) < size.y))
-    {
-      return true;
-    }
-  }
-  if(player.transform.position.x > (iposition.x + size.x))
+  if((p_position.x + size.x) < i_position.x)
   {
     return false;
   }
-  if((player.transform.position.y + size.y) < iposition.y)
+  if(p_position.x > (i_position.x + size.x))
   {
     return false;
   }
-  if(player.transform.position.y > (iposition.y + size.y))
+  if((p_position.y + size.y) < i_position.y)
+  {
+    return false;
+  }
+  if(p_position.y > (i_position.y + size.y))
   {
     return false;
   }
 
-  return false;
+  return true;
 }
 
-void item_collection(std::vector<Item> items,Player &player)
+void item_collection(std::vector<Item> &items,Player &player)
 {
   for(int i=0;i<items.size();i++)
   {
     if(collision_detected(player,items[i]))
     {
-      std::cout << "collision detected" << std::endl;
       items[i].collected = true;
     }
   }
