@@ -32,4 +32,21 @@ void Inventory::draw(sf::RenderWindow &window)
   {
     window.draw(item_boxs[i]);
   }
+  if(items.size() > 0)
+  {
+    for(int i=0; i<items.size();i++)
+    {
+      window.draw(items[i].sprite);
+    }
+  }
+}
+
+void Inventory::add_item(Item &item)
+{
+  if(items.size() < space_count)
+  {
+    int index = (space_count - (space_count - items.size()));
+    item.sprite.setPosition(item_boxs[index].getPosition());
+    items.push_back(item);
+  }
 }

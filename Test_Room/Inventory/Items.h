@@ -5,6 +5,7 @@ enum Item_type { Resource,Money,Tool };
 
 struct Item
 {
+  int u_id;
   bool collected;
   Item_type type;
   std::string name;
