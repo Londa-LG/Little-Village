@@ -36,6 +36,10 @@ int main()
                 log = ig.generate_wood(log,am);
                 inv.add_item(log);
               }
+              if(event.key.code == sf::Keyboard::P)
+              {
+                inv.pop_item();
+              }
             }
         }
 

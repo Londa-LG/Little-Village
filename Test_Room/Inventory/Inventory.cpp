@@ -10,12 +10,20 @@ Inventory::Inventory()
   for(int i=0; i<space_count; i++)
   {
     sf::Vector2f item_pos = sf::Vector2f(position.x + ((outline + width + outline)*i) + margin,position.y + margin);
+
     sf::RectangleShape item_box = sf::RectangleShape(sf::Vector2f(width,height));
     item_box.setOutlineThickness(1);
     item_box.setOutlineColor(sf::Color::White);
     item_box.setFillColor(sf::Color::Yellow);
     item_box.setPosition(item_pos);
-    item_boxs.push_back(item_box);
+
+    Inventory_Space space;
+    space.index = i;
+    space.count = 0;
+    space.taken = false;
+    space.sprite = item_box;
+
+    spaces.push_back(space);
   }
 
   border = sf::RectangleShape(sf::Vector2f(((outline + width + outline)*space_count), 20));
@@ -28,25 +36,50 @@ Inventory::Inventory()
 void Inventory::draw(sf::RenderWindow &window)
 {
   window.draw(border);
-  for(int i =0; i<item_boxs.size();i++)
+  for(int i =0; i<spaces.size();i++)
   {
-    window.draw(item_boxs[i]);
-  }
-  if(items.size() > 0)
-  {
-    for(int i=0; i<items.size();i++)
+    window.draw(spaces.at(i).sprite);
+    if(spaces.at(i).taken)
     {
-      window.draw(items[i].sprite);
+      window.draw(spaces.at(i).item.sprite);
     }
   }
 }
 
 void Inventory::add_item(Item &item)
 {
-  if(items.size() < space_count)
+  for(int i=0; i<spaces.size(); i++)
   {
-    int index = (space_count - (space_count - items.size()));
-    item.sprite.setPosition(item_boxs[index].getPosition());
-    items.push_back(item);
+    if(!spaces.at(i).taken)
+    {
+      item.sprite.setPosition(spaces.at(i).sprite.getPosition());
+      spaces.at(i).item = item;
+      spaces.at(i).taken = true;
+      break;
+    }
   }
 }
+
+void Inventory::pop_item()
+{
+  for(int i=(spaces.size() - 1); i>=0; i--)
+  {
+    if(spaces.at(i).taken)
+    {
+      spaces.at(i).taken = false;
+      break;
+    }
+  }
+}
+
+/*
+void Inventory::remove_item(Item &item)
+{
+  std::vector<Item>::iterator itr;
+  itr = find(items.begin(),items.end(),item);
+  if(itr != items.end())
+  {
+    items.erase(itr);
+  }
+}
+*/
