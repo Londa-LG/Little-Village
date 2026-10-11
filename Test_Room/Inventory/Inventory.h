@@ -1,12 +1,14 @@
 #pragma once
 #include "Items.h"
 #include <vector>
+#include "AssetManager.h"
 
 struct Inventory_Space{
   int index;
   int count;
   Item item;
   bool taken;
+  sf::Text count_display;
   sf::RectangleShape sprite;
 };
 
@@ -19,9 +21,9 @@ class Inventory
 
     sf::RectangleShape border;
 
-    Inventory();
+    Inventory(AssetManager &am);
     void pop_item();
     void add_item(Item &item);
-    void remove_item(Item &item);
+    void remove_item(int space);
     void draw(sf::RenderWindow &window);
 };

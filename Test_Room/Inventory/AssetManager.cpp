@@ -3,6 +3,7 @@
 
 AssetManager::AssetManager()
 {
+  font.loadFromFile("font/Pixely_Sans.ttf");
   load_tiles("./world.png");
   load_characters("./character.png");
 }

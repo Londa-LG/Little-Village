@@ -5,6 +5,7 @@
 class AssetManager
 { 
   public:
+    sf::Font font;
     int tileWidth = 16;
     int tileHeight = 16;
     int totalTilesV = 11;

@@ -1,6 +1,7 @@
 #include "Inventory.h"
+#include "AssetManager.h"
 
-Inventory::Inventory()
+Inventory::Inventory(AssetManager &am)
 {
   int width = 16;
   int height = 16;
@@ -13,8 +14,8 @@ Inventory::Inventory()
 
     sf::RectangleShape item_box = sf::RectangleShape(sf::Vector2f(width,height));
     item_box.setOutlineThickness(1);
-    item_box.setOutlineColor(sf::Color::White);
-    item_box.setFillColor(sf::Color::Yellow);
+    item_box.setOutlineColor(sf::Color::Black);
+    item_box.setFillColor(sf::Color::Black);
     item_box.setPosition(item_pos);
 
     Inventory_Space space;
@@ -22,6 +23,12 @@ Inventory::Inventory()
     space.count = 0;
     space.taken = false;
     space.sprite = item_box;
+    space.count_display.setFont(am.font);
+    space.count_display.setCharacterSize(8);
+    space.count_display.setPosition(item_pos);
+    space.count_display.setStyle(sf::Text::Bold);
+    space.count_display.setFillColor(sf::Color::White);
+    space.count_display.setString(std::to_string(space.count));
 
     spaces.push_back(space);
   }
@@ -42,6 +49,10 @@ void Inventory::draw(sf::RenderWindow &window)
     if(spaces.at(i).taken)
     {
       window.draw(spaces.at(i).item.sprite);
+      if(spaces.at(i).count > 1)
+      {
+        window.draw(spaces.at(i).count_display);
+      }
     }
   }
 }
@@ -55,6 +66,13 @@ void Inventory::add_item(Item &item)
       item.sprite.setPosition(spaces.at(i).sprite.getPosition());
       spaces.at(i).item = item;
       spaces.at(i).taken = true;
+      spaces.at(i).count++;
+      break;
+    }
+    else if((spaces.at(i).item.type != Item_type::Tool) && (spaces.at(i).item.type == item.type))
+    {
+      spaces.at(i).count++;
+      spaces.at(i).count_display.setString(std::to_string(spaces.at(i).count));
       break;
     }
   }
@@ -72,14 +90,7 @@ void Inventory::pop_item()
   }
 }
 
-/*
-void Inventory::remove_item(Item &item)
+void Inventory::remove_item(int space)
 {
-  std::vector<Item>::iterator itr;
-  itr = find(items.begin(),items.end(),item);
-  if(itr != items.end())
-  {
-    items.erase(itr);
-  }
+  spaces.at(space).taken = false;
 }
-*/

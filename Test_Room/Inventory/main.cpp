@@ -10,7 +10,7 @@ int main()
     AssetManager am = AssetManager();
     ItemGenerator ig = ItemGenerator();
 
-    Inventory inv = Inventory();
+    Inventory inv = Inventory(am);
 
     // Game loop
     while (window.isOpen())
@@ -39,6 +39,14 @@ int main()
               if(event.key.code == sf::Keyboard::P)
               {
                 inv.pop_item();
+              }
+              if(event.key.code == sf::Keyboard::R)
+              {
+                inv.remove_item(2);
+              }
+              if(event.key.code == sf::Keyboard::N)
+              {
+                inv.remove_item(0);
               }
             }
         }
