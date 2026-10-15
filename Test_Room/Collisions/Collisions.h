@@ -12,7 +12,8 @@ struct BoundingBox
   sf::RectangleShape sprite;
 };
 
-bool collision_detection_player(Player player, BoundingBox b_box);
-bool collision_detection_box(BoundingBox b_box,BoudningBox b_box);
+void handle_collison_player_box(Player &player, BoundingBox &b_box);
+bool collision_detection_player(Player &player, BoundingBox b_box);
+bool collision_detection_box(BoundingBox b_box1,BoundingBox b_box2);
 bool collision_detection_point(BoundingBox b_box, sf::Vector2f point);
 BoundingBox generate_bounding_box(sf::Vector2f position,sf::Vector2f size);

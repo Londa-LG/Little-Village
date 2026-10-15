@@ -1,11 +1,40 @@
-#include "Collision.h"
+#include "Collisions.h"
+
+void handle_collision_player_box(Player &player, BoundingBox &b_box)
+{
+  float p_top = player.transform.position.y;
+  float p_left = player.transform.position.x;
+  float p_right = player.transform.position.x + player.size.x;
+  float p_bottom = player.transform.position.y + player.size.y;
+
+  if((player.movement.moving_left) && (b_box.right > p_left))
+  {
+    player.transform.position.x = b_box.left + .5;
+    player.sprite.setPosition(player.transform.position);
+  }
+  if((player.movement.moving_right) && (b_box.left < p_right))
+  {
+    player.transform.position.x = b_box.left - .5 - player.size.x;
+    player.sprite.setPosition(player.transform.position);
+  }
+  if((player.movement.moving_up) && (b_box.bottom > p_top))
+  {
+    player.transform.position.y = b_box.bottom + .5;
+    player.sprite.setPosition(player.transform.position);
+  }
+  if((player.movement.moving_down) && (b_box.top < p_bottom))
+  {
+    player.transform.position.y = b_box.left - .5 - player.size.y;
+    player.sprite.setPosition(player.transform.position);
+  }
+}
 
 bool collision_detection_player(Player &player, BoundingBox b_box)
 {
-  p_top = player.transform.position.y;
-  p_left = player.transform.position.x;
-  p_right = player.transform.position.x + player.size.x;
-  p_bottom = player.transform.position.y + player.size.y;
+  float p_top = player.transform.position.y;
+  float p_left = player.transform.position.x;
+  float p_right = player.transform.position.x + player.size.x;
+  float p_bottom = player.transform.position.y + player.size.y;
 
   if(p_right < b_box.left)
   {
@@ -27,7 +56,7 @@ bool collision_detection_player(Player &player, BoundingBox b_box)
   return true;
 }
 
-bool collision_detection_box(BoundingBox b_box1,BoudningBox b_box2)
+bool collision_detection_box(BoundingBox b_box1,BoundingBox b_box2)
 {
   if(b_box1.right < b_box2.left)
   {

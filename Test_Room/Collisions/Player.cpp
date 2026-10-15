@@ -70,7 +70,7 @@ Player::Player(AssetManager &am)
   // Assign sprite
   sprite = am.characters[85];
   sprite.setPosition(position);
-  sprite.scale(2,2);
+  //sprite.scale(2,2);
 }
 
 void Player::draw(sf::RenderWindow &window)
