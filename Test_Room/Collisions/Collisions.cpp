@@ -9,22 +9,22 @@ void handle_collision_player_box(Player &player, BoundingBox &b_box)
 
   if((player.movement.moving_left) && (b_box.right > p_left))
   {
-    player.transform.position.x = b_box.left + .5;
+    player.transform.position.x = b_box.right + 1;
     player.sprite.setPosition(player.transform.position);
   }
   if((player.movement.moving_right) && (b_box.left < p_right))
   {
-    player.transform.position.x = b_box.left - .5 - player.size.x;
+    player.transform.position.x = b_box.left - 1 - player.size.x;
     player.sprite.setPosition(player.transform.position);
   }
   if((player.movement.moving_up) && (b_box.bottom > p_top))
   {
-    player.transform.position.y = b_box.bottom + .5;
+    player.transform.position.y = b_box.bottom + 1;
     player.sprite.setPosition(player.transform.position);
   }
   if((player.movement.moving_down) && (b_box.top < p_bottom))
   {
-    player.transform.position.y = b_box.left - .5 - player.size.y;
+    player.transform.position.y = b_box.top - 1 - player.size.y;
     player.sprite.setPosition(player.transform.position);
   }
 }

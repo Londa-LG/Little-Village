@@ -76,20 +76,19 @@ int main()
 
         if(collision_detection_player(player,b1))
         {
-          std::cout << "1 handle collision" << std::endl;
-          handle_collison_player_box(player,b1);
+          handle_collision_player_box(player,b1);
         }
         if(collision_detection_player(player,b2))
         {
-          std::cout << "2 handle collision" << std::endl;
+          handle_collision_player_box(player,b2);
         }
         if(collision_detection_player(player,b3))
         {
-          std::cout << "3 handle collision" << std::endl;
+          handle_collision_player_box(player,b3);
         }
         if(collision_detection_player(player,b4))
         {
-          std::cout << "4 handle collision" << std::endl;
+          handle_collision_player_box(player,b4);
         }
 
         window.clear(sf::Color::White);
