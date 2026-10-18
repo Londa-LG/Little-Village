@@ -1,9 +1,13 @@
 #include <SFML/Graphics.hpp>
- 
+#include "Settings.h" 
+
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800,600), "Skeleton");
-    window.setFramerateLimit(60);
+    Settings settings;
+    init_settings(settings);
+
+    sf::RenderWindow window(sf::VideoMode(settings.width,settings.height), settings.title);
+    window.setFramerateLimit(settings.frame_rate);
 
     // Game loop
     while (window.isOpen())
