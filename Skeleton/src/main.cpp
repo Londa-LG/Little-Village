@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include "Menu.h"
+#include "Helpers.h"
 #include "Settings.h" 
 
 int main()
@@ -8,6 +10,17 @@ int main()
 
     sf::RenderWindow window(sf::VideoMode(settings.width,settings.height), settings.title);
     window.setFramerateLimit(settings.frame_rate);
+
+
+    StatusFlags flags;
+    flags.gameplay = false;
+    flags.start_menu = true;
+    flags.pause_menu = false;
+    flags.settings_menu = false;
+
+    AssetManager am = AssetManager();
+    StartMenu start = StartMenu(am,settings);
+
 
     // Game loop
     while (window.isOpen())
@@ -19,9 +32,14 @@ int main()
             {
                 window.close();
             }
+        
+            start.update(event,window,flags);
         }
+        
+
 
         window.clear(sf::Color::White);
+        start.draw(window,flags);
         window.display();
     }
 

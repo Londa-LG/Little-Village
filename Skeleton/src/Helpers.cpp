@@ -4,8 +4,9 @@
 
 AssetManager::AssetManager()
 {
-  load_tiles("./world.png");
-  load_characters("./character.png");
+  load_tiles("./assets/textures/world.png");
+  load_characters("./assets/textures/character.png");
+  font.loadFromFile("./assets/font/pixelfy_sans.ttf");
 }
 
 void AssetManager::load_characters(std::string texture_name)

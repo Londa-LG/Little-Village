@@ -18,6 +18,7 @@ class AssetManager
     int totalTilesV = 11;
     int totalTilesH = 12;
 
+    sf::Font font;
     sf::Texture tile_texture;
     sf::Texture character_texture;
     std::vector<sf::Sprite> tiles;
