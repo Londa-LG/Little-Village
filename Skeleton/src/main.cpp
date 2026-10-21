@@ -33,7 +33,7 @@ int main()
                 window.close();
             }
         
-            start.update(event,window,flags);
+            start.update(event,flags);
         }
         
 

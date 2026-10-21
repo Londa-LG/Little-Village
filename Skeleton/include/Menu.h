@@ -3,6 +3,21 @@
 #include "Helpers.h"
 #include "Settings.h"
 
+class Button
+{
+  public:
+    sf::Text label;
+    sf::Vector2f size;
+    sf::Vector2f position;
+    sf::RectangleShape button;
+
+    Button();
+    Button(AssetManager &am,std::string text,sf::Vector2f p_position,sf::Vector2f p_size);
+
+    bool detect_click(sf::RenderWindow &window);
+    void draw(sf::RenderWindow &window);
+};
+
 class StartMenu
 {
   public:
@@ -12,15 +27,24 @@ class StartMenu
     StartMenu(AssetManager &am,Settings &set);
 
     void draw(sf::RenderWindow &window,StatusFlags &flags);
-    void update(sf::Event &event,sf::RenderWindow &window,StatusFlags &flags);
+    void update(sf::Event &event,StatusFlags &flags);
 };
 
 class PauseMenu
 {
   public:
-    PauseMenu();
-    void update(StatusFlags &flags);
-    void draw(sf::RenderWindow &window);
+    Button btn_quit;
+    Button btn_continue;
+    Button btn_settings;
+    sf::RectangleShape background;
+
+    PauseMenu(AssetManager &am,Settings &set);
+
+    void handle_continue(StatusFlags &flags);
+    void handle_settings(StatusFlags &flags);
+    void handle_quit(sf::RenderWindow &window);
+    void update(sf::Event &event,sf::RenderWindow &window,StatusFlags &flags);
+    void draw(sf::RenderWindow &window,StatusFlags &flags);
 };
 
 class SettingsMenu
