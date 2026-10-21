@@ -15,14 +15,14 @@ Button::Button(AssetManager &am,std::string text,sf::Vector2f p_position,sf::Vec
   label.setFont(am.font);
   label.setString(text);
   label.setCharacterSize(18);
-  label.setFillColor(sf::Color::White);
-  label.setPosition(position.x + 10,position.y + 10);
+  label.setFillColor(sf::Color::Black);
+  label.setPosition(position.x + 10,position.y - 2);
 
   button.setSize(size);
   button.setPosition(position);
   button.setOutlineThickness(4);
-  button.setFillColor(sf::Color::Blue);
-  button.setOutlineColor(sf::Color::Blue);
+  button.setFillColor(sf::Color::Yellow);
+  button.setOutlineColor(sf::Color::Yellow);
 }
 
 bool Button::detect_click(sf::RenderWindow &window)
@@ -91,16 +91,21 @@ void StartMenu::update(sf::Event &event,StatusFlags &flags)
 
 PauseMenu::PauseMenu(AssetManager &am,Settings &set)
 {
-  background.setOutlineThickness(4);
-  background.setFillColor(sf::Color::Black);
-  background.setSize(sf::Vector2f(400,500));
-  background.setOutlineColor(sf::Color::Blue);
-  background.setPosition((set.width/2 - 200),(set.height/2 - 250));
+  sf::Vector2f btn_size = {280,20};
+  sf::Vector2f bg_size = {300,115};
+  sf::Vector2f bg_position = {(set.width/2.0f - bg_size.x/2.0f),(set.height/2.0f - bg_size.y/2.0f)};
 
-  btn_quit = Button(am,"Quit",{410,570},{380,20});
-  btn_settings = Button(am,"Settings",{410,540},{380,20});
-  btn_continue = Button(am,"Continue",{410,510},{380,20});
+  background.setSize(bg_size);
+  background.setOutlineThickness(4);
+  background.setPosition(bg_position);
+  background.setFillColor(sf::Color::Black);
+  background.setOutlineColor(sf::Color::Black);
+
+  btn_quit = Button(am,"Quit game",{bg_position.x + 10,bg_position.y + 80},btn_size);
+  btn_settings = Button(am,"Settings",{bg_position.x + 10,bg_position.y + 45},btn_size);
+  btn_continue = Button(am,"Continue",{bg_position.x + 10,bg_position.y + 10},btn_size);
 }
+
 void PauseMenu::handle_quit(sf::RenderWindow &window)
 {
   window.close();
@@ -150,7 +155,8 @@ void PauseMenu::draw(sf::RenderWindow &window,StatusFlags &flags)
   if(flags.pause_menu)
   {
     window.draw(background);
-    btn_quit.draw(window);
+    window.draw(btn_quit.button);
+    window.draw(btn_quit.label);
     btn_settings.draw(window);
     btn_continue.draw(window);
   }

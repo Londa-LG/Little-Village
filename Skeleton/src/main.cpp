@@ -14,12 +14,14 @@ int main()
 
     StatusFlags flags;
     flags.gameplay = false;
-    flags.start_menu = true;
-    flags.pause_menu = false;
+    flags.start_menu = false;
+    flags.pause_menu = true;
     flags.settings_menu = false;
 
     AssetManager am = AssetManager();
     StartMenu start = StartMenu(am,settings);
+    PauseMenu pause = PauseMenu(am,settings);
+    Button btn1 = Button(am,"Test",{410,570},{380,20});
 
 
     // Game loop
@@ -34,12 +36,15 @@ int main()
             }
         
             start.update(event,flags);
+            pause.update(event,window,flags);
         }
         
 
 
         window.clear(sf::Color::White);
         start.draw(window,flags);
+        pause.draw(window,flags);
+        btn1.draw(window);
         window.display();
     }
 
