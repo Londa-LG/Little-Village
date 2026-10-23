@@ -163,3 +163,29 @@ void PauseMenu::draw(sf::RenderWindow &window,StatusFlags &flags)
 }
 
 
+SettingsMenu::SettingsMenu(Settings &set)
+{
+  full_screen = set.full_screen;
+  sf::Vector2f bg_position = {(set.width/2.0f - bg_size.x/2.0f),(set.height/2.0f - bg_size.y/2.0f)};
+
+  background.setSize(bg_size);
+  background.setOutlineThickness(4);
+  background.setPosition(bg_position);
+  background.setFillColor(sf::Color::Black);
+  background.setOutlineColor(sf::Color::Black);
+}
+
+void SettingsMenu::draw(sf::RenderWindow &window,StatusFlags &flags)
+{
+  if(flags.settings_menu)
+  {
+    window.draw(background);
+  }
+}
+
+void SettingsMenu::update(StatusFlags &flags)
+{
+  if(flags.settings_menu)
+  {
+  }
+}

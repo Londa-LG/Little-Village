@@ -50,8 +50,14 @@ class PauseMenu
 class SettingsMenu
 {
   public:
-    SettingsMenu();
+    Button btn_save;
+    bool full_screen;
+    Button btn_apply;
+    sf::RectangleShape background;
+
+    SettingsMenu(Settings &set);
 
     void update(StatusFlags &flags);
     void draw(sf::RenderWindow &window);
+    void save(StatusFlags &flags,Settings &set);
 };
