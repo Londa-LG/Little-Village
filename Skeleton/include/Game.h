@@ -1,6 +1,8 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 #include "Menu.h"
 #include "Helpers.h"
+#include "Settings.h"
 #include "Gameplay.h"
 
 class Game
@@ -10,8 +12,8 @@ class Game
     StartMenu start;
     PauseMenu pause;
     Gameplay gameplay;
-    StatusFlags status;
-    SettigsMenu settings;
+    StatusFlags flags;
+    Settings settings;
     sf::RenderWindow window;
 
     Game();

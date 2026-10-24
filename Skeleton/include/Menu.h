@@ -24,6 +24,7 @@ class StartMenu
     sf::Text title;
     sf::Text start_ins;
 
+    StartMenu();
     StartMenu(AssetManager &am,Settings &set);
 
     void draw(sf::RenderWindow &window,StatusFlags &flags);
@@ -38,6 +39,7 @@ class PauseMenu
     Button btn_settings;
     sf::RectangleShape background;
 
+    PauseMenu();
     PauseMenu(AssetManager &am,Settings &set);
 
     void handle_continue(StatusFlags &flags);
@@ -55,6 +57,7 @@ class SettingsMenu
     Button btn_apply;
     sf::RectangleShape background;
 
+    SettingsMenu();
     SettingsMenu(Settings &set);
 
     void update(StatusFlags &flags);

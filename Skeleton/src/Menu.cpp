@@ -46,6 +46,9 @@ void Button::draw(sf::RenderWindow &window)
   window.draw(label);
 }
 
+StartMenu::StartMenu()
+{
+}
 
 StartMenu::StartMenu(AssetManager &am,Settings &set)
 {
@@ -89,10 +92,14 @@ void StartMenu::update(sf::Event &event,StatusFlags &flags)
 }
 
 
+PauseMenu::PauseMenu()
+{
+}
+
 PauseMenu::PauseMenu(AssetManager &am,Settings &set)
 {
   sf::Vector2f btn_size = {280,20};
-  sf::Vector2f bg_size = {300,115};
+  sf::Vector2f bg_size = {300,75};
   sf::Vector2f bg_position = {(set.width/2.0f - bg_size.x/2.0f),(set.height/2.0f - bg_size.y/2.0f)};
 
   background.setSize(bg_size);
@@ -101,8 +108,8 @@ PauseMenu::PauseMenu(AssetManager &am,Settings &set)
   background.setFillColor(sf::Color::Black);
   background.setOutlineColor(sf::Color::Black);
 
-  btn_quit = Button(am,"Quit game",{bg_position.x + 10,bg_position.y + 80},btn_size);
-  btn_settings = Button(am,"Settings",{bg_position.x + 10,bg_position.y + 45},btn_size);
+  btn_quit = Button(am,"Quit game",{bg_position.x + 10,bg_position.y + 45},btn_size);
+  //btn_settings = Button(am,"Settings",{bg_position.x + 10,bg_position.y + 45},btn_size);
   btn_continue = Button(am,"Continue",{bg_position.x + 10,bg_position.y + 10},btn_size);
 }
 
@@ -117,11 +124,11 @@ void PauseMenu::handle_continue(StatusFlags &flags)
   flags.pause_menu = false;
 }
 
-void PauseMenu::handle_settings(StatusFlags &flags)
+/*void PauseMenu::handle_settings(StatusFlags &flags)
 {
   flags.settings_menu = true;
   flags.pause_menu = false;
-}
+}*/
 
 void PauseMenu::update(sf::Event &event,sf::RenderWindow &window,StatusFlags &flags)
 {
@@ -143,10 +150,10 @@ void PauseMenu::update(sf::Event &event,sf::RenderWindow &window,StatusFlags &fl
     {
       handle_continue(flags);
     }
-    if(btn_settings.detect_click(window))
+    /*if(btn_settings.detect_click(window))
     {
       handle_settings(flags);
-    }
+    }*/
   }
 }
 
@@ -157,15 +164,22 @@ void PauseMenu::draw(sf::RenderWindow &window,StatusFlags &flags)
     window.draw(background);
     window.draw(btn_quit.button);
     window.draw(btn_quit.label);
-    btn_settings.draw(window);
+    //btn_settings.draw(window);
     btn_continue.draw(window);
   }
 }
 
-
-SettingsMenu::SettingsMenu(Settings &set)
+/*
+SettingsMenu()
 {
+}
+
+SettingsMenu::SettingsMenu(AssetManager &am,Settings &set)
+{
+  sf::Vector2f btn_size = {280,20};
+  sf::Vector2f bg_size = {300,115};
   full_screen = set.full_screen;
+
   sf::Vector2f bg_position = {(set.width/2.0f - bg_size.x/2.0f),(set.height/2.0f - bg_size.y/2.0f)};
 
   background.setSize(bg_size);
@@ -173,6 +187,9 @@ SettingsMenu::SettingsMenu(Settings &set)
   background.setPosition(bg_position);
   background.setFillColor(sf::Color::Black);
   background.setOutlineColor(sf::Color::Black);
+
+  btn_save = Button(am,"Save",{},{});
+  btn_full_screen = Button(am,"Window",{},{});
 }
 
 void SettingsMenu::draw(sf::RenderWindow &window,StatusFlags &flags)
@@ -189,3 +206,4 @@ void SettingsMenu::update(StatusFlags &flags)
   {
   }
 }
+*/
