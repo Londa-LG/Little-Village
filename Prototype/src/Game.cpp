@@ -37,14 +37,17 @@ void Game::run()
 
       start.update(event,flags);
       pause.update(event,window,flags);
-      gameplay.update(event,flags);
+      gameplay.event_handling(event,flags);
 
-      window.clear(sf::Color::White);
-      start.draw(window,flags);
-      pause.draw(window,flags);
-      gameplay.draw(window,flags);
-      window.display();
     }
+    
+    gameplay.update(flags);
+
+    window.clear(sf::Color::Blue);
+    gameplay.draw(window,flags);
+    start.draw(window,flags);
+    pause.draw(window,flags);
+    window.display();
   }
 }
 
