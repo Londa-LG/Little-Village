@@ -28,7 +28,8 @@ class StartMenu
     StartMenu(AssetManager &am,Settings &set);
 
     void draw(sf::RenderWindow &window,StatusFlags &flags);
-    void update(sf::Event &event,StatusFlags &flags);
+    void update(sf::RenderWindow &window,StatusFlags &flags);
+    void event_handling(sf::Event &event,StatusFlags &flags);
 };
 
 class PauseMenu
@@ -45,8 +46,9 @@ class PauseMenu
     void handle_continue(StatusFlags &flags);
     void handle_settings(StatusFlags &flags);
     void handle_quit(sf::RenderWindow &window);
-    void update(sf::Event &event,sf::RenderWindow &window,StatusFlags &flags);
     void draw(sf::RenderWindow &window,StatusFlags &flags);
+    void update(sf::RenderWindow &window,StatusFlags &flags);
+    void event_handling(sf::Event &event,sf::RenderWindow &window,StatusFlags &flags);
 };
 
 class SettingsMenu

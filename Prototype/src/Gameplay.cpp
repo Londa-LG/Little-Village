@@ -7,14 +7,12 @@ Gameplay::Gameplay()
 {
 }
 
-Gameplay::Gameplay(AssetManager &am)
+Gameplay::Gameplay(sf::RenderWindow &window,AssetManager &am)
 {
+  camera.reset(sf::FloatRect(0,0,camera_size.x,camera_size.y));
+  //window.setView(camera);
+
   player = Player(am);
-  holder.setFont(am.font);
-  holder.setString("Gameplay");
-  holder.setCharacterSize(60);
-  holder.setFillColor(sf::Color::Black);
-  holder.setPosition(50,50);
 }
 
 void Gameplay::event_handling(sf::Event &event,StatusFlags &flags)
@@ -67,19 +65,21 @@ void Gameplay::event_handling(sf::Event &event,StatusFlags &flags)
   }
 }
 
-void Gameplay::update(StatusFlags &flags)
+void Gameplay::update(sf::RenderWindow &window,StatusFlags &flags)
 {
   if((flags.gameplay) && (!flags.pause_menu))
   {
     player.sMovement();
+    camera.setCenter(player.sprite.getPosition().x,player.sprite.getPosition().y);
+    window.setView(camera);
   }
 }
 
 void Gameplay::draw(sf::RenderWindow &window,StatusFlags &flags)
 {
-  if(flags.gameplay)
+  if((flags.gameplay) && (!flags.pause_menu))
   {
-    //window.draw(holder);
+    window.draw(holder);
     player.draw(window);
   }
 }

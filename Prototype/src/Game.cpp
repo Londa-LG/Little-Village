@@ -20,7 +20,7 @@ Game::Game()
   am = AssetManager();
   start = StartMenu(am,settings);
   pause = PauseMenu(am,settings);
-  gameplay = Gameplay(am);
+  gameplay = Gameplay(window,am);
 }
 
 void Game::run()
@@ -35,15 +35,17 @@ void Game::run()
         window.close();
       }
 
-      start.update(event,flags);
-      pause.update(event,window,flags);
+      start.event_handling(event,flags);
+      pause.event_handling(event,window,flags);
       gameplay.event_handling(event,flags);
 
     }
     
-    gameplay.update(flags);
+    start.update(window,flags);
+    pause.update(window,flags);
+    gameplay.update(window,flags);
 
-    window.clear(sf::Color::Blue);
+    window.clear(sf::Color::White);
     gameplay.draw(window,flags);
     start.draw(window,flags);
     pause.draw(window,flags);

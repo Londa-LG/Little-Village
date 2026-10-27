@@ -76,7 +76,7 @@ void StartMenu::draw(sf::RenderWindow &window,StatusFlags &flags)
   }
 }
 
-void StartMenu::update(sf::Event &event,StatusFlags &flags)
+void StartMenu::event_handling(sf::Event &event,StatusFlags &flags)
 {
   if(flags.start_menu)
   {
@@ -90,7 +90,13 @@ void StartMenu::update(sf::Event &event,StatusFlags &flags)
     }
   }
 }
-
+void StartMenu::update(sf::RenderWindow &window,StatusFlags &flags)
+{
+  if(flags.start_menu)
+  {
+    window.setView(window.getDefaultView());
+  }
+}
 
 PauseMenu::PauseMenu()
 {
@@ -130,7 +136,7 @@ void PauseMenu::handle_continue(StatusFlags &flags)
   flags.pause_menu = false;
 }*/
 
-void PauseMenu::update(sf::Event &event,sf::RenderWindow &window,StatusFlags &flags)
+void PauseMenu::event_handling(sf::Event &event,sf::RenderWindow &window,StatusFlags &flags)
 {
   if(flags.pause_menu)
   {
@@ -154,6 +160,14 @@ void PauseMenu::update(sf::Event &event,sf::RenderWindow &window,StatusFlags &fl
     {
       handle_settings(flags);
     }*/
+  }
+}
+
+void PauseMenu::update(sf::RenderWindow &window,StatusFlags &flags)
+{
+  if(flags.pause_menu)
+  {
+    window.setView(window.getDefaultView());
   }
 }
 

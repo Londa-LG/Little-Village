@@ -72,9 +72,10 @@ Player::Player(AssetManager &am)
   transform.acceleration.y = pow(transform.maxVel,2) / (2 * mov_pix);
 
   // Assign sprite
-  sprite = am.characters[85];
+  sprite.setTexture(am.character_texture);
+  sprite.setTextureRect(am.characters[85]);
+  sprite.setColor(sf::Color::White);
   sprite.setPosition(position);
-  //sprite.scale(2,2);
 }
 
 void Player::draw(sf::RenderWindow &window)
