@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Helpers.h"
 #include "Gameplay.h"
+#include "World.h"
 
 Gameplay::Gameplay()
 {
@@ -10,9 +11,10 @@ Gameplay::Gameplay()
 Gameplay::Gameplay(sf::RenderWindow &window,AssetManager &am)
 {
   camera.reset(sf::FloatRect(0,0,camera_size.x,camera_size.y));
-  //window.setView(camera);
-
   player = Player(am);
+  ground = Layer("./assets/levels/test_room_floor.csv");
+  objects = Layer("./assets/levels/test_room_objects.csv");
+  character = Layer("./assets/levels/test_room_characters.csv");
 }
 
 void Gameplay::event_handling(sf::Event &event,StatusFlags &flags)
@@ -75,11 +77,13 @@ void Gameplay::update(sf::RenderWindow &window,StatusFlags &flags)
   }
 }
 
-void Gameplay::draw(sf::RenderWindow &window,StatusFlags &flags)
+void Gameplay::draw(AssetManager &am,sf::RenderWindow &window,StatusFlags &flags)
 {
-  if((flags.gameplay) && (!flags.pause_menu))
+  if((flags.gameplay))
   {
-    window.draw(holder);
+    ground.draw(am.world_texture,am.tiles,window);
+    objects.draw(am.world_texture,am.tiles,window);
+    character.draw(am.character_texture,am.characters,window);
     player.draw(window);
   }
 }

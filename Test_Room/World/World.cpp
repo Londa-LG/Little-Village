@@ -62,7 +62,7 @@ int Layer::remove_rotation(int raw)
   return tileGid;
 }
 
-void Layer::draw(std::vector<sf::Sprite> &tiles, sf::RenderWindow &window)
+void Layer::draw(sf::Texture &texture,std::vector<sf::IntRect> &tiles, sf::RenderWindow &window)
 {
   int index;
   for(int i=0; i<layer_tiles.size(); i++)
@@ -70,13 +70,19 @@ void Layer::draw(std::vector<sf::Sprite> &tiles, sf::RenderWindow &window)
     Mapping m = layer_tiles[i];
     if((m.id >= 0) && (m.id < total_tiles))
     {
-      sf::Sprite tile = tiles[m.id];
+      sf::Sprite tile;
+      tile.setTexture(texture);
+      tile.setColor(sf::Color::White);
+      tile.setTextureRect(tiles[m.id]);
       tile.setPosition(m.column,m.row);
       window.draw(tile);
     }
     else if(m.id >= 0){
       int id = remove_rotation(m.id);
-      sf::Sprite tile = tiles[id];
+      sf::Sprite tile;
+      tile.setTexture(texture);
+      tile.setTextureRect(tiles[id]);
+      tile.setColor(sf::Color::White);
       tile.setPosition(m.column,m.row);
       window.draw(tile);
     }

@@ -2,8 +2,8 @@
 
 void init_settings(Settings &set)
 {
-  set.width = 800;
-  set.height = 450;
+  set.width = 600;
+  set.height = 600;
   set.frame_rate = 60;
   set.full_screen = false;
   set.title = "Log village";

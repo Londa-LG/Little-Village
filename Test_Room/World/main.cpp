@@ -25,9 +25,9 @@ int main()
         }
 
         window.clear(sf::Color::Yellow);
-        ground.draw(am.tiles, window);
-        objects.draw(am.tiles, window);
-        character.draw(am.characters, window);
+        ground.draw(am.world_texture,am.tiles, window);
+        objects.draw(am.world_texture,am.tiles, window);
+        character.draw(am.character_texture,am.characters, window);
         window.display();
     }
 

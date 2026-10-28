@@ -21,5 +21,5 @@ class Layer{
     Layer(std::string filename);
     void detect_transform(int raw);
     int remove_rotation(int raw);
-    void draw(std::vector<sf::Sprite> &tiles,sf::RenderWindow &window);
+    void draw(sf::Texture &texture,std::vector<sf::IntRect> &tiles,sf::RenderWindow &window);
 };

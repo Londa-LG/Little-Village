@@ -46,7 +46,7 @@ void Game::run()
     gameplay.update(window,flags);
 
     window.clear(sf::Color::White);
-    gameplay.draw(window,flags);
+    gameplay.draw(am,window,flags);
     start.draw(window,flags);
     pause.draw(window,flags);
     window.display();
