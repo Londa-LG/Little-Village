@@ -1,3 +1,4 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "Helpers.h"
@@ -72,6 +73,7 @@ void Gameplay::update(sf::RenderWindow &window,StatusFlags &flags)
   if((flags.gameplay) && (!flags.pause_menu))
   {
     player.sMovement();
+    
     camera.setCenter(player.sprite.getPosition().x,player.sprite.getPosition().y);
     window.setView(camera);
   }

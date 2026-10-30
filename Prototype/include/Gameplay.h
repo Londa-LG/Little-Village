@@ -1,8 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Helpers.h"
-#include "Player.h"
 #include "World.h"
+#include "Player.h"
+#include "Helpers.h"
 
 class Gameplay
 {
