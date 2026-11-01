@@ -100,7 +100,7 @@ BoundingBox generate_bounding_box(sf::Vector2f position,sf::Vector2f size)
 
   b_box.sprite.setSize(size);
   b_box.sprite.setPosition(position);
-  b_box.sprite.setOutlineThickness(2);
+  b_box.sprite.setOutlineThickness(0.5);
   b_box.sprite.setOutlineColor(sf::Color::Blue);
   b_box.sprite.setFillColor(sf::Color::Transparent);
 

@@ -73,6 +73,14 @@ void Gameplay::update(sf::RenderWindow &window,StatusFlags &flags)
   if((flags.gameplay) && (!flags.pause_menu))
   {
     player.sMovement();
+
+    for(int i=0;i<objects.b_boxs.size();i++)
+    {
+      if(collision_detection_player(player,objects.b_boxs[i]))
+      {
+        handle_collision_player_box(player,objects.b_boxs[i]);
+      }
+    }
     
     camera.setCenter(player.sprite.getPosition().x,player.sprite.getPosition().y);
     window.setView(camera);

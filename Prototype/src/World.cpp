@@ -45,6 +45,16 @@ Layer::Layer(std::string filename)
   }
 
   file.close();
+
+  for(int i=0; i<layer_tiles.size(); i++)
+  {
+    Mapping m = layer_tiles[i];
+    if((m.id >= 0) && (m.id < total_tiles))
+    {
+      BoundingBox box = generate_bounding_box(sf::Vector2f(m.column,m.row),sf::Vector2f(tile_size,tile_size));
+      b_boxs.push_back(box);
+    }
+  }
 }
 
 void Layer::detect_transform(int raw)
@@ -75,8 +85,6 @@ void Layer::draw(sf::Texture &texture,std::vector<sf::IntRect> &tiles, sf::Rende
     Mapping m = layer_tiles[i];
     if((m.id >= 0) && (m.id < total_tiles))
     {
-      BoundingBox box = generate_bounding_box(sf::Vector2f(m.column,m.row),sf::Vector2f(tile_size,tile_size));
-      b_boxs.push_back(box);
 
       sf::Sprite tile;
       tile.setTexture(texture);
@@ -86,9 +94,6 @@ void Layer::draw(sf::Texture &texture,std::vector<sf::IntRect> &tiles, sf::Rende
       window.draw(tile);
     }
     else if(m.id >= 0){
-      BoundingBox box = generate_bounding_box(sf::Vector2f(m.column,m.row),sf::Vector2f(tile_size,tile_size));
-      b_boxs.push_back(box);
-
       int id = remove_rotation(m.id);
       sf::Sprite tile;
       tile.setTexture(texture);
