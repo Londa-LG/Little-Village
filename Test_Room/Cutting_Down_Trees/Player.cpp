@@ -59,7 +59,6 @@ void Player::Walk_to_destination(sf::Vector2f destination)
 Player::Player(AssetManager &am)
 {
   movement = {false,false,false,false,false,false};
-  size = {16,16};
 
   // Generate transform
   transform.position = position;

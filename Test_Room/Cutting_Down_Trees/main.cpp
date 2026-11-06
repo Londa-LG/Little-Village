@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
-#include "Player.h"
 #include "AssetManager.h"
+#include "Player.h"
  
 int main()
 {

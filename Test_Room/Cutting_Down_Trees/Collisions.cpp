@@ -1,4 +1,3 @@
-#include "Player.h"
 #include "Collisions.h"
 
 void handle_collision_player_box(Player &player, BoundingBox &b_box)
@@ -30,7 +29,7 @@ void handle_collision_player_box(Player &player, BoundingBox &b_box)
   }
 }
 
-bool collision_detection_player_box(Player &player, BoundingBox b_box)
+bool collision_detection_player(Player &player, BoundingBox b_box)
 {
   float p_top = player.transform.position.y;
   float p_left = player.transform.position.x;
@@ -57,7 +56,7 @@ bool collision_detection_player_box(Player &player, BoundingBox b_box)
   return true;
 }
 
-bool collision_detection_box_box(BoundingBox b_box1,BoundingBox b_box2)
+bool collision_detection_box(BoundingBox b_box1,BoundingBox b_box2)
 {
   if(b_box1.right < b_box2.left)
   {
@@ -79,7 +78,7 @@ bool collision_detection_box_box(BoundingBox b_box1,BoundingBox b_box2)
   return true;
 }
 
-bool collision_detection_point_box(sf::Vector2f point, BoundingBox b_box)
+bool collision_detection_point(BoundingBox b_box, sf::Vector2f point)
 {
   if((b_box.left < point.x) && (b_box.right > point.x) && (b_box.top < point.y) && (b_box.bottom > point.y))
   {
@@ -92,10 +91,6 @@ bool collision_detection_point_box(sf::Vector2f point, BoundingBox b_box)
 BoundingBox generate_bounding_box(sf::Vector2f position,sf::Vector2f size)
 {
   BoundingBox b_box;
-
-  b_box.item = true;
-  b_box.npc = false;
-  b_box.tree = false;
 
   b_box.size = size;
   b_box.top = position.y;

@@ -15,16 +15,12 @@ struct Item
   BoundingBox bounds;
 };
 
-struct Tree
-{
-  int yield;
-  int health;
-  int max_health;
-};
-
 struct Axe
 {
   int damage;
+  int durability;
+  int max_durability;
+
   bool collected;
   Item_type type;
   std::string name;
@@ -34,25 +30,34 @@ struct Axe
   BoundingBox bounds;
 };
 
+struct Tree
+{
+  int health;
+  int max_health;
+  BoundingBox bounds;
+};
+
 class ItemGenerator
 {
   public:
     int item_count;
 
     ItemGenerator();
-    Item generate_wood(Item &wood,AssetManager &am);
-    Item generate_money(Item &coin,AssetManager &am);
+    Item generate_wood(Item &wood,AssetManager &am,sf::Vector2f poistion);
+    Item generate_money(Item &coin,AssetManager &am,sf::Vector2f poistion);
 };
 
 class AxeGenerator
 {
   public:
-    Axe generate_default_axe(Axe &axe,std::string p_name,std::string description,AssetManager &am);
-    Axe generate_default_battle_axe(Axe &axe,std::string p_name,std::string description,AssetManager &am);
+    AxeGenerator();
+    Axe generate_default_axe(Axe &axe,AssetManager &am,sf::Vector2f position);
+    Axe generate_default_battle_axe(Axe &axe,AssetManager &am,sf::Vector2f position);
 };
 
 class TreeGenerator
 {
   public:
+    TreeGenerator();
     Tree generate_default_tree(Tree &tree);
 };
