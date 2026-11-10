@@ -89,6 +89,9 @@ Axe AxeGenerator::generate_default_battle_axe(Axe &axe,AssetManager &am,sf::Vect
   return axe;
 }
 
+TreeGenerator::TreeGenerator()
+{
+}
 
 Tree TreeGenerator::generate_default_tree(Tree &tree)
 {

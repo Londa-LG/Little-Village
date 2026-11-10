@@ -1,11 +1,18 @@
 #include <SFML/Graphics.hpp>
-#include "AssetManager.h"
+#include <iostream>
+#include "Items.h"
 #include "Player.h"
+#include "AssetManager.h"
  
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800,600), "Player");
     window.setFramerateLimit(60);
+
+    Tree tree;
+    TreeGenerator trg;
+    tree = trg.generate_default_tree(tree);
+    tree.bounds.sprite.setPosition(500,300);
 
     AssetManager am = AssetManager();
 
@@ -21,14 +28,12 @@ int main()
             {
                 window.close();
             }
-
             if(event.type == sf::Event::KeyPressed)
             {
               if(event.key.code == sf::Keyboard::Escape)
               {
                 window.close();
               }
-
               if(event.key.code == sf::Keyboard::A)
               {
                 player.movement.moving_left = true;
@@ -69,8 +74,15 @@ int main()
 
         player.sMovement();
 
+        if(collision_detection_player(player,tree.bounds))
+        {
+          handle_collision_player_box(player,tree.bounds);
+          std::cout << "damage tree" << std::endl;
+        }
+
         window.clear(sf::Color::White);
         player.draw(window);
+        window.draw(tree.bounds.sprite);
         window.display();
     }
 
