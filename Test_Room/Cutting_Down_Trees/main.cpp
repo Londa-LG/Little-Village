@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include "Items.h"
 #include "Player.h"
 #include "AssetManager.h"
@@ -11,8 +10,7 @@ int main()
 
     Tree tree;
     TreeGenerator trg;
-    tree = trg.generate_default_tree(tree);
-    tree.bounds.sprite.setPosition(500,300);
+    tree = trg.generate_tree(tree,sf::Vector2f(300,300),sf::Vector2f(16,16));
 
     AssetManager am = AssetManager();
 
@@ -77,7 +75,6 @@ int main()
         if(collision_detection_player(player,tree.bounds))
         {
           handle_collision_player_box(player,tree.bounds);
-          std::cout << "damage tree" << std::endl;
         }
 
         window.clear(sf::Color::White);

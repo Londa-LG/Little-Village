@@ -28,7 +28,6 @@ class Player{
 
     float mov_pix = 4;
     float mov_seconds = 2;
-    sf::Vector2f position = {400,300};
 
     Player(AssetManager &am);
     void sMovement();

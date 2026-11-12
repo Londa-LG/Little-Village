@@ -60,4 +60,5 @@ class TreeGenerator
   public:
     TreeGenerator();
     Tree generate_default_tree(Tree &tree);
+    Tree generate_tree(Tree &tree,sf::Vector2f position,sf::Vector2f size);
 };

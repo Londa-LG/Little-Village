@@ -62,15 +62,16 @@ Player::Player(AssetManager &am)
   size = {16,16};
 
   // Generate transform
-  transform.position = position;
+  transform.position = {400,300};
   transform.maxVel = mov_pix / (0.5 * mov_seconds);
   transform.acceleration.x = pow(transform.maxVel,2) / (2 * mov_pix);
   transform.acceleration.y = pow(transform.maxVel,2) / (2 * mov_pix);
 
   // Assign sprite
-  sprite = am.characters[85];
-  sprite.setPosition(position);
-  //sprite.scale(2,2);
+  sprite.setTexture(am.character_texture);
+  sprite.setTextureRect(am.characters[85]);
+  sprite.setColor(sf::Color::White);
+  sprite.setPosition(transform.position);
 }
 
 void Player::draw(sf::RenderWindow &window)

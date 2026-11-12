@@ -59,9 +59,10 @@ void Player::Walk_to_destination(sf::Vector2f destination)
 Player::Player(AssetManager &am)
 {
   movement = {false,false,false,false,false,false};
+  size = {16,16};
 
   // Generate transform
-  transform.position = position;
+  transform.position = {400,300};
   transform.maxVel = mov_pix / (0.5 * mov_seconds);
   transform.acceleration.x = pow(transform.maxVel,2) / (2 * mov_pix);
   transform.acceleration.y = pow(transform.maxVel,2) / (2 * mov_pix);
@@ -70,7 +71,7 @@ Player::Player(AssetManager &am)
   sprite.setTexture(am.character_texture);
   sprite.setTextureRect(am.characters[85]);
   sprite.setColor(sf::Color::White);
-  sprite.setPosition(position);
+  sprite.setPosition(transform.position);
 }
 
 void Player::draw(sf::RenderWindow &window)

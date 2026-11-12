@@ -101,3 +101,12 @@ Tree TreeGenerator::generate_default_tree(Tree &tree)
 
   return tree;
 }
+
+Tree TreeGenerator::generate_tree(Tree &tree,sf::Vector2f position,sf::Vector2f size)
+{
+  tree.health = 100;
+  tree.max_health = 100;
+  tree.bounds = generate_bounding_box(position,size);
+
+  return tree;
+}

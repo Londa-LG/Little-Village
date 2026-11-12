@@ -5,21 +5,17 @@
 class AssetManager
 { 
   public:
-    sf::Font font;
     int tileWidth = 16;
     int tileHeight = 16;
     int totalTilesV = 11;
     int totalTilesH = 12;
 
-    sf::Texture tile_texture;
+    sf::Texture world_texture;
     sf::Texture character_texture;
-    std::vector<sf::Sprite> tiles;
-    std::vector<sf::Sprite> characters;
+    std::vector<sf::IntRect> tiles;
+    std::vector<sf::IntRect> characters;
 
     AssetManager();
-
-    void draw_tiles(sf::RenderWindow &window);
-    void draw_characters(sf::RenderWindow &window);
 
     void load_tiles(std::string texture_name);
     void load_characters(std::string texture_name);

@@ -36,6 +36,7 @@ bool collision_detection_player(Player &player, BoundingBox b_box)
   float p_right = player.transform.position.x + player.size.x;
   float p_bottom = player.transform.position.y + player.size.y;
 
+
   if(p_right < b_box.left)
   {
     return false;
@@ -54,6 +55,7 @@ bool collision_detection_player(Player &player, BoundingBox b_box)
   }
 
   return true;
+  
 }
 
 bool collision_detection_box(BoundingBox b_box1,BoundingBox b_box2)
